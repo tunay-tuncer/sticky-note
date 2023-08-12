@@ -85,7 +85,9 @@ function addNote(){
     const newEditButtonIcon = document.createElement("i")
 
     newNote.classList.add("note")
-    newNoteText.textContent = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam ullam quidem, voluptate tempore alias iure reprehenderit voluptatibus saepe. Quos magnam provident quis corrupti, minus rem possimus quas maiores ratione."
+    newNoteText.textContent = ""
+    newNoteText.setAttribute("contenteditable", true)   
+    newNoteText.classList.add("editable")
 
     newDeleteButton.classList.add("deleteButton")
     newDeleteButtonIcon.classList.add("fas")
@@ -93,19 +95,57 @@ function addNote(){
 
     newEditButton.classList.add("editButton")
     newEditButtonIcon.classList.add("fas")
-    newEditButtonIcon.classList.add("fa-pen")
+    newEditButtonIcon.classList.add("fa-check")
+
+    newNote.appendChild(newDeleteButton)
+    newDeleteButton.appendChild(newDeleteButtonIcon)
 
     noteContainer.appendChild(newNote)
     newNote.appendChild(newNoteText)
 
-    newNote.appendChild(newDeleteButton)
-    newDeleteButton.appendChild(newDeleteButtonIcon)
 
     newNote.appendChild(newEditButton)
     newEditButton.appendChild(newEditButtonIcon)
 
     newNote.style.backgroundColor = colorChoosen
+    editNote()
 }
+
+function editNote(){
+    const allNotes = document.querySelectorAll(".note")
+    console.log(allNotes)
+
+    allNotes.forEach((item,index)=>{
+        item.children[2].children[0].addEventListener("click", ()=>{
+            if(item.children[1].className.includes("editable")){
+            
+                item.children[2].children[0].classList.remove("fa-check")
+                item.children[2].children[0].classList.add("fa-pen")
+
+                item.children[1].setAttribute("contenteditable", false)  
+
+                item.children[1].classList.toggle("editable")
+                console.log(allNotes)
+             }
+             
+            else{
+                item.children[2].children[0].classList.remove("fa-pen")
+                item.children[2].children[0].classList.add("fa-check")
+
+                item.children[1].setAttribute("contenteditable", true)  
+
+                item.children[1].classList.toggle("editable")
+                console.log("ğ")
+            }
+        }) 
+        
+        item.children[0].children[0].addEventListener("click", ()=>{
+            noteContainer.removeChild(item)
+        })
+    })
+}
+
+
 
 chooseColor()
 
