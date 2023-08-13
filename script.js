@@ -2,6 +2,7 @@ const addButton = document.querySelector(".addButton")
 const icon  = document.querySelector("i")
 const colorSlider = document.querySelector(".colorSlider")
 const colorDiv = document.querySelectorAll(".colorDiv")
+const deleteAllButton = document.querySelector("#deleteAllButton")
 
 const noteContainer = document.querySelector(".noteContainer")
 const note = document.querySelector(".note")
@@ -68,7 +69,6 @@ function chooseColor(){
                 colorChoosen = colorObject.purple
                 addNote()
             }
-            console.log(colorChoosen)
 
         })
     })
@@ -109,6 +109,7 @@ function addNote(){
 
     newNote.style.backgroundColor = colorChoosen
     editNote()
+    placeholderTextFunc()
 }
 
 function editNote(){
@@ -135,19 +136,40 @@ function editNote(){
                 item.children[1].setAttribute("contenteditable", true)  
 
                 item.children[1].classList.toggle("editable")
-                console.log("ğ")
             }
         }) 
         
         item.children[0].children[0].addEventListener("click", ()=>{
             noteContainer.removeChild(item)
+            placeholderTextFunc()
         })
     })
 }
 
 
 
+
+
+deleteAllButton.addEventListener("click",()=>{
+    const allNotes = document.querySelectorAll(".note")
+    allNotes.forEach((item,index)=>{
+       noteContainer.removeChild(item)
+    })
+    placeholderTextFunc()
+})
+
+function placeholderTextFunc(){
+    console.log(noteContainer.childElementCount)
+    const placeholderText = document.querySelector(".placeholderText")
+    if(noteContainer.childElementCount === 0){
+        placeholderText.style.display = "block"
+    }
+    else{
+        placeholderText.style.display = "none"
+    }
+}
+
+
+placeholderTextFunc()
 chooseColor()
-
-
 addButton.addEventListener("click", noteAnimations)

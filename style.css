@@ -16,7 +16,7 @@ button{
 }
 
 nav{
-    width: 7rem;
+    min-width: 7rem;
     height: 100vh;
     background: none;
     border-right: 1px solid rgba(105, 105, 105, 0.5);
@@ -129,6 +129,11 @@ nav{
     font-size: 0.9rem;
     width: 100%;
     height: 100%;
+    background: none;
+}
+
+.note p span{
+    background: none;
 }
 
 .note::-webkit-scrollbar{
@@ -173,6 +178,7 @@ nav{
 
 .editButton:hover{
     scale: 1.2;
+    color: green;
 }
 
 .deleteButton{
@@ -198,4 +204,28 @@ nav{
     font-size: 0.9rem;
     padding-bottom: calc(100% - 0.9rem);
     white-space: normal;
+}
+
+
+#deleteAllButton{
+    color: black;
+    position: absolute;
+    bottom: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.5rem;
+}
+
+#deleteAllButton:hover{
+    color: red;
+    scale: 1.1;
+}
+
+.placeholderText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #5f5f5f;
+    display: none;
 }
